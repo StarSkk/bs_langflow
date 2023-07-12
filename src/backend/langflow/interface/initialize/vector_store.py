@@ -8,6 +8,7 @@ from langchain.vectorstores import (
     Weaviate,
     SupabaseVectorStore,
     MongoDBAtlasVectorSearch,
+    Milvus,
 )
 
 import os
@@ -212,6 +213,19 @@ def initialize_qdrant(class_object: Type[Qdrant], params: dict):
     return class_object.from_documents(**params)
 
 
+def initialize_milvus(class_object: Type[Milvus], params: dict):
+    conn_milvus = {
+        "host": "172.17.0.1",
+        "port": "19530",
+        "user": "",
+        "password": "",
+        "secure": False,
+    }
+    if not docs_in_params(params):
+        return class_object(params["embedding"], connection_args=conn_milvus)
+    return class_object.from_documents(params["documents"], params["embedding"], connection_args=conn_milvus, drop_old=True)
+
+
 vecstore_initializer: Dict[str, Callable[[Type[Any], dict], Any]] = {
     "Pinecone": initialize_pinecone,
     "Chroma": initialize_chroma,
@@ -220,4 +234,5 @@ vecstore_initializer: Dict[str, Callable[[Type[Any], dict], Any]] = {
     "FAISS": initialize_faiss,
     "SupabaseVectorStore": initialize_supabase,
     "MongoDBAtlasVectorSearch": initialize_mongodb,
+    "Milvus": initialize_milvus,
 }

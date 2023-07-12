@@ -109,6 +109,8 @@ llms:
     documentation: "https://python.langchain.com/docs/modules/model_io/models/llms/integrations/openai"
   ChatOpenAI:
     documentation: "https://python.langchain.com/docs/modules/model_io/models/chat/integrations/openai"
+  AzureChatOpenAI:
+    documentation: ""
   LlamaCpp:
     documentation: "https://python.langchain.com/docs/modules/model_io/models/llms/integrations/llamacpp"
   CTransformers:
@@ -256,6 +258,8 @@ retrievers:
   # ZepRetriever:
   #   documentation: "https://python.langchain.com/docs/modules/data_connection/retrievers/integrations/zep_memorystore"
 vectorstores:
+  Milvus:
+    documentation: ""
   Chroma:
     documentation: "https://python.langchain.com/docs/modules/data_connection/vectorstores/integrations/chroma"
   Qdrant:
